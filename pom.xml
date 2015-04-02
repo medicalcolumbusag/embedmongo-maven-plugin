@@ -8,8 +8,9 @@
         <version>7</version>
     </parent>
   
-    <groupId>com.github.joelittlejohn.embedmongo</groupId>
-    <artifactId>embedmongo-maven-plugin</artifactId>
+    <groupId>de.medicalcolumbus.platform</groupId>
+    <artifactId>mc-embedmongo-maven-plugin</artifactId>
+	<!-- based on embedmongo-maven-plugin version 0.1.12 -->
     <version>0.1.12</version>
 
     <packaging>maven-plugin</packaging>
@@ -19,10 +20,10 @@
     <url>http://github.com/joelittlejohn/embedmongo-maven-plugin</url>
     <inceptionYear>2012</inceptionYear>
 
-    <issueManagement>
-    	<system>GitHub</system>
-    	<url>https://github.com/joelittlejohn/embedmongo-maven-plugin/issues</url>
-    </issueManagement>
+    <!--<issueManagement>-->
+    	<!--<system>GitHub</system>-->
+    	<!--<url>https://github.com/joelittlejohn/embedmongo-maven-plugin/issues</url>-->
+    <!--</issueManagement>-->
     
     <licenses>
         <license>
@@ -31,12 +32,12 @@
         </license>
     </licenses>
 
-    <scm>
-        <url>http://github.com/joelittlejohn/embedmongo-maven-plugin/tree/master</url>
-        <connection>scm:git:git@github.com:joelittlejohn/embedmongo-maven-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:joelittlejohn/embedmongo-maven-plugin.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
+    <!--<scm>-->
+        <!--<url>http://github.com/joelittlejohn/embedmongo-maven-plugin/tree/master</url>-->
+        <!--<connection>scm:git:git@github.com:joelittlejohn/embedmongo-maven-plugin.git</connection>-->
+        <!--<developerConnection>scm:git:git@github.com:joelittlejohn/embedmongo-maven-plugin.git</developerConnection>-->
+        <!--<tag>HEAD</tag>-->
+    <!--</scm>-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -108,7 +109,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit-dep</artifactId>
-            <version>4.11</version>
+            <version>4.10</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

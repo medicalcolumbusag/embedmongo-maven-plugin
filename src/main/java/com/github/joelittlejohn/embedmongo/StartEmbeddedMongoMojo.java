@@ -30,6 +30,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import de.flapdoodle.embed.process.io.directories.FixedPath;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -110,6 +111,14 @@ public class StartEmbeddedMongoMojo extends AbstractMojo {
      * @since 0.1.0
      */
     private File databaseDirectory;
+
+	/**
+	 * The location of a directory that will hold the installation of MongoDB.
+	 *
+	 * @parameter expression="${embedmongo.installDirectory}"
+	 * @since 0.1.14
+	 */
+	private File installDirectory;
 
     /**
      * An IP address for the MongoDB instance to be bound to during its
@@ -287,7 +296,7 @@ public class StartEmbeddedMongoMojo extends AbstractMojo {
     }
 
     /**
-     * Saves port to the {@link MavenProject#getProperties()} (with the property
+     * Saves port to the {@link org.apache.maven.project.MavenProject#getProperties()} (with the property
      * name {@code embedmongo.port}) to allow others (plugins, tests, etc) to
      * find the randomly allocated port.
      */
@@ -314,7 +323,14 @@ public class StartEmbeddedMongoMojo extends AbstractMojo {
     }
 
     private IArtifactStore getArtifactStore() {
-        IDownloadConfig downloadConfig = new DownloadConfigBuilder().defaultsForCommand(Command.MongoD).downloadPath(downloadPath).build();
+	    IDownloadConfig downloadConfig = null;
+	    if (installDirectory != null) {
+		    downloadConfig = new DownloadConfigBuilder().defaultsForCommand(Command.MongoD).downloadPath(downloadPath)
+				    .artifactStorePath(new FixedPath(installDirectory.getAbsolutePath())).build();
+		    System.setProperty("de.flapdoodle.embed.io.tmpdir", installDirectory.getAbsolutePath());
+	    } else {
+		    downloadConfig = new DownloadConfigBuilder().defaultsForCommand(Command.MongoD).downloadPath(downloadPath).build();
+	    }
         return new ArtifactStoreBuilder().defaults(Command.MongoD).download(downloadConfig).build();
     }
 
